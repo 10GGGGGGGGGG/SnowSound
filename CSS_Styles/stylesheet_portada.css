@@ -1,0 +1,68 @@
+.portada {
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.title-container {
+  color: rgb(0, 13, 189);
+}
+.SVG-container {
+  width: 40%;
+}
+.portada_title {
+  margin-right: 50px;
+  font-size: 3.5rem;
+  font-family: "Audiowide", cursive;
+}
+.portada_subtitle {
+  float: left;
+}
+#brand-icon-title {
+  font-size: 4rem;
+  margin-left: -1vw;
+}
+@media (max-width: 500px) {
+  .portada_title,
+  #brand-icon-title {
+    font-size: 1.75rem;
+  }
+  .portada_subtitle {
+    font-size: 0.5rem;
+  }
+}
+#bird_body {
+  animation: birdBody 0.7s alternate ease infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+#music_notes_1 {
+  animation: flyingNotes 1s ease infinite;
+}
+#music_notes_2 {
+  animation: flyingNotes 1.7s ease infinite;
+}
+
+@keyframes birdBody {
+  from {
+    transform: rotateZ(-5deg);
+    transform: translateY(15px);
+  }
+  to {
+    transform: translateY(0px);
+    transform: rotateZ(5deg);
+  }
+}
+@keyframes flyingNotes {
+  from {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-20px, -20px);
+  }
+}
