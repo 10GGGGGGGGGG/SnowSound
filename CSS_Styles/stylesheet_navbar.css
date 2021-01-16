@@ -99,12 +99,22 @@ body {
   width: 100%;
   margin-bottom: 3vw;
 }
+
 @media (max-width: 500px) {
+  .navbar .center {
+    transform: translate(0px);
+  }
+  #searchTextBox {
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 30vw;
+    height: 2rem;
+  }
   .brand-title,
   #brand-icon {
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
-  .sidebar a {
-    font-size: 0.5rem;
+  .sidebar {
+    width: 40%;
+    left: -40%;
   }
 }
