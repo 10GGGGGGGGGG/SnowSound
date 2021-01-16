@@ -10,6 +10,7 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: #fdfdca;
 }
+/*------------------------------------NAVBAR--------------------------------------*/
 .navbar {
   position: fixed;
   top: 0;
@@ -62,14 +63,11 @@ body {
   transform: scale(1.1);
   color: #ff00ff;
 }
-.navbar a:hover {
+.navbar a :hover {
   transform: scale(1.3);
   color: #ff00ff;
 }
-.sidebar a:hover {
-  transform: scale(1.3);
-  color: #cc00cc;
-}
+/*------------------------------------SIDEBAR--------------------------------------*/
 .sidebar {
   height: 100%; /* 100% Full-height */
   width: 15%; /* 0 width - change this with JavaScript */
@@ -78,28 +76,50 @@ body {
   z-index: 1; /* Stay on top */
   top: 0;
   background-image: linear-gradient(#cccc00 0%, #cccc00 50%, #636300 100%);
-  /*background-color: #cccc00;*/
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
 }
-/* The sidebar links */
-.sidebar a {
+.sidebar .row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
   padding: 1vw 1vw 1vw 2vw;
-  text-decoration: none;
-  font-size: 1.2rem;
-  color: #000000;
-  display: block;
   transition: 0.3s;
-}
-#closeSidebar {
-  float: right;
+  text-decoration: none;
+  color: #000000;
 }
 .sidebar .rowClose {
-  display: block;
+  display: inline-block;
   width: 100%;
-  margin-bottom: 3vw;
 }
-
+.sidebar #closeSidebar {
+  color: #000000;
+  transition: 0.3s;
+  padding: 10px;
+  float: right;
+}
+.sidebar #closeSidebar:hover {
+  transform: scale(1.4);
+  color: #cc00cc;
+}
+.sidebar .menuItem {
+  padding-left: 1vw;
+  font-size: 1.2rem;
+  display: block;
+  transition: 0.3s;
+  align-self: stretch;
+}
+.sidebar .row:hover,
+.sidebar .row:hover .menuItem {
+  background-color: #dfdf00;
+  color: #cc00cc;
+}
+.sidebar hr.separator {
+  border: none;
+  border-top: 2px dotted #999900;
+  border-radius: 5px;
+}
 @media (max-width: 500px) {
   .navbar .center {
     transform: translate(0px);
@@ -116,5 +136,9 @@ body {
   .sidebar {
     width: 40%;
     left: -40%;
+  }
+  .sidebar .menuItem {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
   }
 }
