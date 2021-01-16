@@ -108,7 +108,6 @@ body {
   font-size: 1.2rem;
   display: block;
   transition: 0.3s;
-  align-self: stretch;
 }
 .sidebar .row:hover,
 .sidebar .row:hover .menuItem {
@@ -139,6 +138,5 @@ body {
   }
   .sidebar .menuItem {
     font-size: 0.8rem;
-    margin-bottom: 10px;
   }
 }
