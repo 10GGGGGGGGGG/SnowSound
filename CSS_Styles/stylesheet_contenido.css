@@ -5,3 +5,15 @@
   text-align: justify;
   background-color: #ffff99;
 }
+.splide__slide img {
+  border-radius: 50%;
+  width: 100%;
+  height: auto;
+}
+.splide__slide__container {
+  border-radius: 10%;
+}
+h1,
+h4 {
+  text-align: center;
+}

@@ -16,6 +16,7 @@ body {
   top: 0;
   width: 100%;
   padding: 0.5vw 2vw;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -38,6 +39,9 @@ body {
 #searchBt {
   margin-right: 1vw;
 }
+.navbar i {
+  transition: 0.2s;
+}
 #searchTextBox {
   background-color: rgba(255, 255, 255, 0.5);
   width: 20vw;
@@ -55,9 +59,7 @@ body {
   color: black;
   font-size: 2.5rem;
   margin-right: 1vw;
-}
-.navbar a {
-  transition: transform 0.2s;
+  transition: 0.2s;
 }
 #leftMenuBtn:hover {
   transform: scale(1.1);
@@ -73,7 +75,7 @@ body {
   width: 15%; /* 0 width - change this with JavaScript */
   left: -15%;
   position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
+  z-index: 2; /* Stay on top */
   top: 0;
   background-image: linear-gradient(#cccc00 0%, #cccc00 50%, #636300 100%);
   overflow-x: hidden; /* Disable horizontal scroll */

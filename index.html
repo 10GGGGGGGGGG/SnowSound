@@ -2,11 +2,17 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="CSS_Styles/stylesheet_navbar.css" />
+    <link rel="stylesheet" href="CSS_Styles/stylesheet_player.css" />
     <link rel="stylesheet" href="CSS_Styles/stylesheet_portada.css" />
     <link rel="stylesheet" href="CSS_Styles/stylesheet_contenido.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css"
     />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -65,8 +71,53 @@
           placeholder="Busca canciones, artistas, géneros..."
         />
       </div>
-      <a href="#"><i class="material-icons"> login </i></a>
+      <a href="#"><i class="material-icons">login</i></a>
     </nav>
+    <!--------------------------------------------- REPRODUCTOR -------------------------------------------------------->
+    <div id="trapezoid">
+      <a href="javascript:void(0)" onclick="openPlayer()"
+        ><i class="material-icons" id="openPlayer">keyboard_arrow_up</i></a
+      >
+    </div>
+    <div class="player">
+      <div class="left">
+        <i class="material-icons">skip_previous</i>
+        <i class="material-icons">play_circle_outline</i>
+        <i class="material-icons">skip_next</i>
+        <div class="volume_control">
+          <i class="material-icons" id="volume">volume_up</i>
+          <div class="volume_content">
+            <input
+              type="range"
+              orient="vertical"
+              min="0"
+              max="100"
+              value="50"
+              class="slider"
+              id="vol_slider"
+            />
+          </div>
+        </div>
+        <div id="vol_output">50%</div>
+      </div>
+      <div class="center">
+        <div id="current_time">0:00</div>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value="0"
+          class="slider"
+          id="time_slider"
+        />
+        <div id="total_time">3:00</div>
+      </div>
+      <div class="right">
+        <div class="titulo">Título de canción</div>
+        <div class="artista">Nombre del artista</div>
+        <div class="genero">género</div>
+      </div>
+    </div>
     <!----------------------------------------------- PORTADA ---------------------------------------------------------->
     <div class="portada">
       <div class="title-container">
@@ -295,194 +346,66 @@
     </div>
     <!----------------------------------------------- CONTENIDO -------------------------------------------------------->
     <div class="contenido">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac
-        tortor quis felis ultricies porttitor. Fusce sodales, odio et aliquet
-        consectetur, orci ex maximus metus, vel sodales eros urna et turpis.
-        Donec ullamcorper euismod sem ac eleifend. Etiam malesuada risus non
-        dolor dapibus faucibus. Morbi pellentesque lacus in ligula dapibus, eu
-        lobortis nisi dapibus. Etiam ut orci dolor. Proin ut enim et felis
-        molestie pellentesque viverra sed mauris.
-        <br />
-        Cras convallis, justo eget condimentum aliquam, nisl sem sagittis est,
-        consectetur molestie mi mi a mauris. Vivamus dui quam, porttitor nec
-        consequat sit amet, fringilla ac lectus. Suspendisse a ligula euismod,
-        fringilla mi et, bibendum elit. Sed a orci et eros dictum pulvinar at
-        vel nibh. Morbi in quam sollicitudin, suscipit erat a, pharetra nulla.
-        Donec venenatis, libero sed mattis faucibus, justo lorem varius nunc, ac
-        venenatis massa enim at leo. In a libero justo. Etiam a dignissim lacus.
-        Morbi sed egestas nisl, vitae venenatis magna. Praesent sollicitudin
-        dapibus elementum. Maecenas vitae nisi vel velit pretium volutpat. Donec
-        ultricies tempor maximus. Vestibulum iaculis, lectus a fringilla
-        scelerisque, felis nisl pretium velit, quis auctor massa ex sed quam.
-        Suspendisse ut viverra nulla.
-        <br />
-        Curabitur scelerisque lacus sit amet libero accumsan laoreet. Ut
-        lobortis nibh quis justo eleifend eleifend. Maecenas tortor lectus,
-        hendrerit in ante at, consequat consectetur nunc. Aliquam pharetra,
-        lectus sed feugiat aliquet, ligula tortor iaculis erat, sed sodales
-        libero nulla eget felis. Duis non rhoncus tellus. Praesent convallis mi
-        non lorem commodo, id tincidunt lacus posuere. Etiam id mi diam.
-        <br />
-        Vivamus porta urna ullamcorper mauris venenatis elementum. Nulla
-        facilisi. Nam maximus suscipit eros, at dignissim erat faucibus at.
-        Quisque et risus consectetur, semper velit eu, fermentum est. Sed
-        tincidunt diam vel urna aliquam blandit. Sed ut odio ante. Sed tincidunt
-        nec tellus a mattis. Sed ornare id odio id bibendum. Nulla sit amet
-        sagittis purus. Sed libero urna, lacinia eget ex sit amet, condimentum
-        posuere tortor. Integer sit amet ullamcorper ex. Sed porta, purus ac
-        blandit venenatis, ex arcu gravida nulla, non auctor odio sem sed
-        sapien. Aenean ut vulputate massa, at fringilla lacus. Proin tincidunt
-        leo at nibh finibus volutpat. Suspendisse tristique eros at enim tempor,
-        a ultricies turpis tristique. Etiam at interdum enim, a aliquet ipsum.
-        <br />
-        Ut quis risus vel urna faucibus volutpat vel nec ex. Aenean at risus
-        nibh. Cras pellentesque libero eu ligula malesuada, in mollis arcu
-        vestibulum. Suspendisse ligula arcu, semper convallis aliquet sed,
-        luctus eu justo. Vivamus elementum sed enim eu dignissim. Maecenas
-        faucibus varius lacus pharetra faucibus. Sed posuere mi in augue pretium
-        rhoncus. Integer a malesuada massa, et eleifend erat. Maecenas
-        pellentesque, leo eget aliquam ornare, arcu tellus facilisis magna, nec
-        congue nisl leo vitae justo. Praesent a arcu mi. Cras gravida arcu nec
-        pellentesque condimentum. Vivamus imperdiet euismod massa, convallis
-        euismod magna sollicitudin vitae.
-        <br />
-        Pellentesque et ipsum nec tellus aliquam egestas in sed arcu. Praesent
-        non consequat sem. Mauris blandit sapien ac risus interdum, vitae
-        ullamcorper ipsum pellentesque. Donec pretium, quam nec rutrum tempus,
-        ipsum lorem efficitur sapien, vitae faucibus velit sapien ut ante.
-        Vestibulum metus nibh, congue sed accumsan eget, faucibus sit amet sem.
-        Aenean malesuada laoreet nisl eget volutpat. Vestibulum fringilla
-        placerat pharetra. Suspendisse ac pellentesque odio.
-        <br />
-        Donec pretium mi non nunc malesuada molestie. Praesent id leo
-        sollicitudin, laoreet eros ac, fringilla leo. Suspendisse lectus dolor,
-        tincidunt eget justo quis, mollis porttitor ex. Pellentesque nec
-        consectetur velit, id ultricies leo. Curabitur porta ornare finibus.
-        Aenean non elit sit amet risus laoreet vestibulum. Donec vehicula,
-        libero vitae faucibus tincidunt, ligula eros condimentum ante, eget
-        malesuada arcu urna id neque. Cras rhoncus, tellus gravida sollicitudin
-        fermentum, enim velit lobortis diam, eget iaculis massa urna ut nisl.
-        Vivamus id mi mi. Aenean nibh mauris, consectetur a malesuada vel,
-        auctor quis diam.
-        <br />
-        Proin nec bibendum nibh. Aenean consequat ornare sapien. Nunc venenatis
-        lobortis diam. Donec commodo, tortor eget mattis venenatis, dui erat
-        varius lacus, id aliquet sem metus id dui. Suspendisse potenti. Nullam
-        ac nisi sed nibh posuere condimentum a sed turpis. Morbi sodales erat in
-        risus rutrum aliquet ac eget odio. Ut sit amet malesuada risus.
-        <br />
-        Vivamus malesuada diam in nisl tincidunt, non congue ante laoreet.
-        Curabitur pretium eros ligula, sit amet rutrum turpis sollicitudin et.
-        Fusce eu tempus magna. Curabitur dapibus mollis sagittis. Morbi faucibus
-        luctus ante, at ullamcorper eros tempus non. In et ipsum viverra,
-        eleifend ipsum vel, aliquam arcu. Duis ut metus lacus. Mauris ultricies,
-        quam non elementum mattis, augue odio scelerisque ex, quis varius risus
-        dolor et dui. Duis aliquet varius neque, eget scelerisque elit congue
-        non. Vivamus ut euismod felis, sed facilisis leo. Sed vel laoreet neque.
-        Praesent ante lacus, rutrum eget enim nec, fringilla elementum massa. In
-        porttitor id ex a placerat. Maecenas posuere lacinia tincidunt.
-        <br />
-        Aenean justo nisl, commodo id diam at, aliquam blandit diam. Proin
-        scelerisque, risus ac dictum fringilla, odio ligula ultricies magna, ut
-        bibendum enim diam eget est. Sed ut nulla id orci pretium mattis. Lorem
-        ipsum dolor sit amet, consectetur adipiscing elit. Phasellus justo
-        ligula, euismod eget varius sit amet, hendrerit vestibulum augue. Nunc
-        faucibus mauris nec tortor aliquet, ut vulputate tellus feugiat. Quisque
-        ut risus dignissim dui rutrum porttitor. Etiam at nisi a urna auctor
-        porta a porttitor nibh. Vivamus sed dignissim neque. Vivamus a tellus ut
-        felis lacinia convallis nec eget neque. Integer aliquam porta nisi nec
-        vehicula. Ut purus arcu, hendrerit sed quam quis, feugiat luctus mauris.
-        Praesent non efficitur magna. Sed eleifend risus eget pulvinar faucibus.
-        <br />
-        Sed aliquam turpis auctor nibh tempor efficitur. Pellentesque sed odio
-        turpis. Maecenas aliquet justo quis elit suscipit, vel pulvinar nibh
-        pulvinar. Nulla auctor, augue id sodales pretium, velit nibh gravida
-        tellus, eget fermentum mi felis auctor orci. Morbi ultricies pulvinar
-        dignissim. Nullam eget placerat felis. Nam volutpat purus at lorem
-        gravida, nec rutrum metus maximus. Maecenas lacinia faucibus dignissim.
-        <br />
-        Nulla fermentum vulputate neque, sed porta est rhoncus non. Aliquam
-        mollis viverra dignissim. Aliquam erat volutpat. Nulla tincidunt nisi
-        nibh, ac pulvinar ante interdum nec. Proin malesuada quam malesuada eros
-        pretium, id cursus nulla volutpat. Nulla euismod lectus eu egestas
-        tempus. Nulla lacinia elit a vehicula vestibulum.
-        <br />
-        Aliquam tempus dictum tempus. Maecenas iaculis placerat iaculis. Donec
-        feugiat lorem nec condimentum cursus. Integer sapien ex, dictum at felis
-        sit amet, vestibulum laoreet massa. Cras blandit quis nibh vel maximus.
-        In vitae dolor id sem tincidunt sodales. Nulla facilisi. Aenean commodo
-        varius enim, sed malesuada nunc ullamcorper quis.
-        <br />
-        Vestibulum fringilla ex nunc, eu ultricies nibh vehicula at. Cras neque
-        nulla, lacinia at ligula in, sodales venenatis eros. Etiam pretium purus
-        justo, a maximus velit gravida sit amet. Integer lacinia massa in magna
-        feugiat, vitae aliquet lorem tincidunt. Duis fringilla nunc nec quam
-        efficitur imperdiet. Donec at porttitor arcu. Donec ac interdum lacus.
-        Proin condimentum lectus et risus viverra dapibus. Morbi egestas, nunc
-        non congue varius, nulla dui finibus nisi, ac fringilla felis turpis
-        auctor arcu. Vivamus eget mi sit amet velit suscipit scelerisque et in
-        ipsum. Suspendisse pharetra, velit nec ullamcorper ultricies, libero
-        erat blandit lorem, quis sodales diam eros a justo.
-        <br />
-        In elementum tempor velit, id suscipit felis tincidunt ac. Etiam ornare
-        ornare justo, vitae tristique quam pretium sed. Donec a pretium nulla.
-        Nunc hendrerit neque vel malesuada ullamcorper. Aliquam in ligula nunc.
-        Duis maximus sem et risus eleifend vulputate. Donec varius libero arcu,
-        ac laoreet leo auctor vel. Pellentesque fermentum orci eu massa aliquet
-        venenatis.
-        <br />
-        Cras laoreet viverra viverra. Vestibulum ligula massa, cursus eu tempus
-        viverra, varius a nunc. Integer ut diam auctor, tempus nisi non, pretium
-        ante. Donec vitae libero est. Aenean vitae elit sed nibh tempus
-        tincidunt. Fusce nec velit mi. Quisque accumsan turpis lobortis magna
-        congue bibendum. In ac posuere nisl, in porta purus. Ut tempus sem
-        posuere justo vehicula molestie. Morbi sit amet odio id orci congue
-        aliquam. Integer vehicula tristique luctus. Proin venenatis ipsum non
-        mauris vestibulum gravida. Maecenas varius pharetra ante in commodo.
-        Cras arcu felis, feugiat semper erat et, condimentum dictum orci. Donec
-        eget nisi blandit, lobortis ante iaculis, iaculis quam. Nulla facilisi.
-        <br />
-        Suspendisse non vulputate purus. Duis eu metus ultricies, luctus ex sed,
-        tristique nulla. Aliquam erat volutpat. Nunc sit amet tortor quis purus
-        tincidunt cursus. In euismod ex volutpat aliquet mollis. Nullam eget
-        ultricies sem. Quisque accumsan erat ante, ac tincidunt quam dapibus
-        vel. Ut placerat non leo non ornare.
-        <br />
-        Integer non sem consequat, feugiat nisl ullamcorper, interdum sem. Fusce
-        pellentesque metus metus, ac tristique turpis euismod eget. Duis ornare
-        scelerisque dictum. Sed suscipit euismod purus, eget blandit massa
-        luctus quis. Nunc vitae ante et erat malesuada consequat vitae non
-        ipsum. Ut lobortis magna ac rutrum commodo. Aliquam non sollicitudin
-        leo, eu faucibus lorem. Maecenas fringilla nulla eget ipsum ullamcorper,
-        sit amet rutrum justo tincidunt. Pellentesque dolor augue, porttitor sed
-        turpis nec, mattis tempus ipsum.
-        <br />
-        Pellentesque quis volutpat justo. Integer tempus nibh urna, id
-        scelerisque diam volutpat vel. Aenean vulputate tellus in ipsum
-        interdum, eu aliquam dui porta. Proin non massa lacinia, elementum nunc
-        vitae, sodales mauris. Aliquam enim nibh, varius at purus eget,
-        consequat consequat ex. Morbi facilisis, lectus non venenatis efficitur,
-        metus eros scelerisque odio, et hendrerit magna massa sed arcu. In in
-        sapien in ligula blandit rhoncus vitae ac lacus. Praesent posuere risus
-        elementum sollicitudin placerat. Ut eleifend dui id quam feugiat, ut
-        fermentum ipsum vulputate. Vivamus bibendum purus in magna venenatis,
-        vel aliquam nunc sodales. Curabitur placerat, nibh feugiat dapibus
-        fringilla, magna massa mattis libero, vel eleifend lorem sapien vitae
-        quam.
-        <br />
-        Pellentesque vel velit in neque convallis ultrices. Mauris mollis nisl
-        velit, a convallis lectus eleifend ac. Donec ultrices vestibulum nunc,
-        sed convallis nisi malesuada vitae. Maecenas ac nisi eget mauris mattis
-        tempus. Aliquam bibendum pharetra sapien, nec cursus dolor posuere sed.
-        Nunc sed erat odio. Nunc ultricies augue at arcu egestas, id laoreet
-        diam tempor. Sed sed accumsan tortor. Sed urna risus, ornare ac ante sit
-        amet, congue condimentum tortor. Suspendisse a elementum sapien, at
-        eleifend orci. Pellentesque fermentum augue id efficitur cursus. Fusce
-        elementum eget sem ut suscipit. Nam bibendum ornare nisi eget ultricies.
-        Curabitur interdum consectetur dui at sodales. Nunc vel mi sed tortor
-        bibendum lobortis a in ligula.
-      </p>
+      <h1>Artistas destacados</h1>
+      <br />
+      <div class="splide">
+        <div class="splide__track">
+          <ul class="splide__list">
+            <li class="splide__slide" title="Bad Bunny">
+              <div class="splide__slide__container">
+                <img
+                  src="https://phantom-elmundo.unidadeditorial.es/afeb1cbb9095d9d2a532c3aa06625601/crop/82x0/1227x765/resize/746/f/jpg/assets/multimedia/imagenes/2020/05/10/15891358002692.jpg"
+                  alt="Bad Bunny"
+                  title="Bad Bunny"
+                />
+              </div>
+              <h4>Bad Bunny</h4>
+            </li>
+            <li class="splide__slide" title="Jarabe de Palo">
+              <div class="splide__slide__container">
+                <img
+                  src="https://lacronicadesalamanca.com/wp-content/uploads/2020/06/pau-dones-jarabe-palo-688x450.jpg"
+                  alt="Jarabe de Palo"
+                  title="Jarabe de Palo"
+                />
+              </div>
+              <h4>Jarabe de Palo</h4>
+            </li>
+            <li class="splide__slide" title="Nathy Peluso">
+              <div class="splide__slide__container">
+                <img
+                  src="https://cflvdg.avoz.es/default/2019/01/10/00121547132282239825974/Foto/SFE11P2F6_155611.jpg"
+                  alt="Nathy Peluso"
+                  title="Nathy Peluso"
+                />
+              </div>
+              <h4>Nathy Peluso</h4>
+            </li>
+            <li class="splide__slide" title="Aitana">
+              <div class="splide__slide__container">
+                <img
+                  src="https://ep01.epimg.net/elpais/imagenes/2018/03/27/gente/1522143545_745442_1522143772_noticia_normal.jpg"
+                  alt="Aitana"
+                  title="Aitana"
+                />
+              </div>
+              <h4>Aitana</h4>
+            </li>
+            <li class="splide__slide" title="C. Tangana">
+              <div class="splide__slide__container">
+                <img
+                  src="https://los40es00.epimg.net/los40/imagenes/2019/06/10/actualidad/1560163746_659907_1560163806_noticia_normal.jpg"
+                  alt="C. Tangana"
+                  title="C. Tangana"
+                />
+              </div>
+              <h4>C. Tangana</h4>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <br />
+      <br />
     </div>
   </body>
   <script src="JS_Scripts/script.js"></script>
