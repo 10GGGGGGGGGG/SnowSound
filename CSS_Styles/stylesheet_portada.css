@@ -60,6 +60,9 @@
   }
 }
 @media (max-width: 500px) {
+  .portada {
+    margin-top: 4vw;
+  }
   .portada_title,
   #brand-icon-title {
     font-size: 2.5rem;

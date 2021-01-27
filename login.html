@@ -4,22 +4,122 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="CSS_Styles/stylesheet_login.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <title>SnowSound - Login</title>
   </head>
   <body>
     <div class="login_card">
       <div class="left">
-        <h1>Ingreso</h1>
+        <form id="form-submit-login" class="left_container">
+          <h1>Ingreso</h1>
+          <div class="middle">
+            <div class="input_text_container">
+              <i class="material-icons">email</i>
+              <input
+                type="email"
+                name="email"
+                placeholder="Correo electrónico"
+                id="user_email"
+                required
+              />
+            </div>
+            <br />
+            <div class="input_text_container">
+              <i class="material-icons">vpn_key</i>
+              <input
+                type="password"
+                name="password"
+                placeholder="Contraseña"
+                id="user_password"
+                required
+              />
+            </div>
+          </div>
+          <input type="submit" name="submit" />
+          <p id="login_alert"></p>
+        </form>
       </div>
       <div class="right">
-        <h1>Registro</h1>
+        <form id="form-submit-register" class="right_container">
+          <h1>Registro</h1>
+          <div class="middle">
+            <div class="input_text_container">
+              <i class="material-icons">email</i>
+              <input
+                type="email"
+                name="email_R"
+                placeholder="Correo electrónico"
+                id="user_email_r"
+                required
+              />
+            </div>
+            <br />
+            <div class="input_text_container">
+              <i class="material-icons">account_circle</i>
+              <input
+                type="text"
+                name = "username"
+                placeholder="Nombre de usuario"
+                id="user_name_r"
+                required
+              />
+            </div>
+            <br />
+            <div class="input_text_container">
+              <i class="material-icons">vpn_key</i>
+              <input
+                type="password"
+                name="password_R"
+                placeholder="Contraseña"
+                id="user_password_r"
+                required
+              />
+            </div>
+            <br />
+            <div class="input_text_container">
+              <i class="material-icons">vpn_key</i>
+              <input
+                type="password"
+                name="confirm_password"
+                placeholder="Confirmar contraseña"
+                id="user_password_r2"
+                required
+              />
+            </div>
+          </div>
+          <input type="submit" name="submit"/>
+          <p id="register_alert"></p>
+        </form>
       </div>
       <div class="moving_panel">
-        <button type="button" onclick="changePosition()" id="switchButton">
-          REGISTRARSE
-        </button>
+        <div class="brand-logo">
+          <div class="brand-title">SnowSound</div>
+          <i class="material-icons" id="brand-icon">ac_unit</i>
+        </div>
+        <div class="moving_panel_text">
+          <h2 id="main_text">¡Bienvenido de nuevo!</h2>
+          <br />
+          <h3 id="second_text">
+            Introduce tu usuario y contraseña y accede a tu área personal para
+            disfrutar al máximo de las funcionalidades de SnowSound.
+          </h3>
+        </div>
+        <div class="buttons_container">
+          <a href="index.html" id="homeButton"
+            ><i class="material-icons">home</i></a
+          >
+          <button type="button" onclick="changePosition()" id="switchButton">
+            REGISTRARSE
+          </button>
+        </div>
       </div>
     </div>
   </body>
   <script src="JS_Scripts/script_login.js"></script>
+  <script src="JS_Scripts/ajax.js"></script>
+
 </html>

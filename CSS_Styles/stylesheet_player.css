@@ -40,7 +40,8 @@
   transition: 0.5s;
   border: none;
 }
-.player .left, .player .center{
+.player .left,
+.player .center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,11 +49,12 @@
 .player i {
   margin: 1vw;
   font-size: 40px;
+  cursor: pointer;
 }
-#volume{
+#volume {
   font-size: 30px;
 }
-.volume_control{
+.volume_control {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,30 +65,33 @@
   bottom: 140px;
   background-color: rgba(204, 204, 0, 1);
   border-radius: 10px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   width: 200px;
-  -webkit-transform:rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
 }
-.volume_control:hover .volume_content{
+.volume_control:hover .volume_content {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#vol_slider{
+#vol_slider {
   margin: 15px;
+}
+#vol_output {
+  width: 20px;
 }
 /* The slider itself */
 .slider {
   -webkit-appearance: none;
   width: 100%;
   height: 10px;
-  border-radius: 5px;  
+  border-radius: 5px;
   background: #666666;
   outline: none;
   opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
 }
 
 /* Mouse-over effects */
@@ -100,7 +105,7 @@
   appearance: none;
   width: 20px;
   height: 20px;
-  border-radius: 50%; 
+  border-radius: 50%;
   background: rgb(255, 255, 100);
   border-style: solid;
   border-width: 2px;
@@ -114,36 +119,43 @@
   background: rgb(255, 255, 100);
   cursor: pointer; /* Cursor on hover */
 }
-#time_slider{
+#time_slider {
   width: 30vw;
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
 }
 .player .right .titulo {
   font-weight: bold;
   font-size: 17px;
 }
-.player .right .artista, .player .right .genero {
+.player .right .artista,
+.player .right .genero {
   font-size: 12px;
 }
 @media (max-width: 500px) {
   .volume_content {
     bottom: 120px;
   }
-  #time_slider{
+  #time_slider {
     width: 20vw;
   }
-  .player i{
-    font-size: 30px;
+  .player i {
+    font-size: 25px;
   }
-  #volume{
+  #volume {
     font-size: 20px;
   }
-  #vol_output, #current_time, #total_time{
-    font-size: 12px;
+  #vol_output,
+  #current_time,
+  #total_time {
+    font-size: 9px;
   }
-.player .right .titulo{
-  font-weight: bold;
-  font-size: 14px;
-}
-.player .right .artista, .player .right .genero {
-  font-size: 9px;
+  .player .right .titulo {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .player .right .artista,
+  .player .right .genero {
+    font-size: 9px;
+  }
 }
