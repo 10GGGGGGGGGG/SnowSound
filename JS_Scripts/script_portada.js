@@ -34,13 +34,4 @@ function openPlayer() {
   }
 }
 
-/*
-var vol_slider = document.getElementById("vol_slider");
-var vol_output = document.getElementById("vol_output");
-vol_output.innerHTML = vol_slider.value + "%";
-
-vol_slider.oninput = function () {
-  vol_output.innerHTML = this.value + "%";
-};*/
-
 

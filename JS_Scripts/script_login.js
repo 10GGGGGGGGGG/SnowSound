@@ -1,5 +1,3 @@
-//document.getElementById(id).style.property = new style
-//var x = document.getElementsByClassName("example")[0];
 var login = true;
 function changePosition() {
   var panel = document.getElementsByClassName("moving_panel")[0];
@@ -29,18 +27,3 @@ function changePosition() {
     login = true;
   }
 }
-/*document.getElementsByClassName("moving_panel")[0];
-  transform: translateX(100%);*/
-/*
-function openPlayer() {
-    const bottom = document.querySelector(".player").style.bottom;
-    if (bottom == "-70px" || bottom == "") {
-      document.getElementById("openPlayer").innerHTML = "keyboard_arrow_down";
-      document.getElementById("trapezoid").style.bottom = "70px";
-      document.getElementsByClassName("player")[0].style.bottom = "0px";
-    } else {
-      document.getElementById("openPlayer").innerHTML = "keyboard_arrow_up";
-      document.getElementById("trapezoid").style.bottom = "0px";
-      document.getElementsByClassName("player")[0].style.bottom = "-70px";
-    }
-  }*/

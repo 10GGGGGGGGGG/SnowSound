@@ -4,22 +4,20 @@ var object_id_song;
 var player = null;
 var timer;
 var first_scroll = false;
-// 2. This code loads the IFrame Player API code asynchronously.
 var tag = document.createElement('script');
 
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-//loadDefaultLists();
-
 $(document).ready(function () {
+    // Comprobamos si existe alguna sesion activa nada mas cargar la pagina
     check_session();
     $("#time_slider").val(0);
 
+    // Boton que permite cargar todas las canciones
     $('#button_songs').click(function () {
         let query = $('#button_songs').val();
-        console.log(query);
         $.ajax({
             type: 'POST',
             url: "PHP/db_control.php",
@@ -27,20 +25,20 @@ $(document).ready(function () {
                 'queryValue': query
             },
             beforeSend: function () {
-                $('#text_message').text("Consultando la bbdd, espere");
                 console.log("Consultando la bbdd, espere");
             },
             success: function (response) {
                 loadSongsTable(response);
             },
             error: function (xhr, status) {
-                $('#text_message').text("Error en la consulta de datos");
+                console.log("Error en la consulta de datos");
             }
         });
     });
+
+    //Boton que permite cargar las canciones favoritas del usuario con la sesion iniciada
     $("#button_fav_songs").click(function () {
         let query = $('#button_fav_songs').val();
-        console.log(idUser);
         $.ajax({
             type: "POST",
             url: "PHP/db_control.php",
@@ -52,18 +50,17 @@ $(document).ready(function () {
                 loadSongsTable(response);
             },
             error: function (xhr, status) {
-                $('#text_message').text("Error en la consulta de datos");
+                console.log("Error en la consulta de datos");
             }
         });
     });
 
+    //Boton que permite cargar las listas de música favoritas del usuario con la sesion iniciada
     $("#button_fav_songs_lists").click(function () {
         let query = $('#button_fav_songs_lists').val();
-        console.log(idUser);
         $.ajax({
             type: "POST",
             url: "PHP/db_control.php",
-
             data: {
                 'queryValue': query
             },
@@ -71,14 +68,14 @@ $(document).ready(function () {
                 loadListsTable(response, query);
             },
             error: function (xhr, status) {
-                $('#text_message').text("Error en la consulta de datos");
+                console.log("Error en la consulta de datos");
             }
         });
     });
 
+    //Boton que permite cargar los artistas en el carrusel de contenido
     $("#button_artists").click(function () {
         let query = $('#button_artists').val();
-        console.log(query);
         $.ajax({
             type: "POST",
             url: "PHP/db_control.php",
@@ -89,11 +86,12 @@ $(document).ready(function () {
                 loadListsTable(response, query);
             },
             error: function (xhr, status) {
-                $('#text_message').text("Error en la consulta de datos");
+                console.log("Error en la consulta de datos");
             }
         });
     });
 
+    //Boton que permite cargar todas las listas de música en el carrusel de contenido
     $("#button_songs_lists").click(function () {
         let query = $('#button_songs_lists').val();
         $.ajax({
@@ -106,11 +104,12 @@ $(document).ready(function () {
                 loadListsTable(response, query);
             },
             error: function (xhr, status) {
-                $('#text_message').text("Error en la consulta de datos");
+                console.log("Error en la consulta de datos");
             }
         });
     })
 
+    //Boton que permite cargar las categorias disponibles en la web
     $("#button_categories").click(function () {
         let query = $('#button_categories').val();
         $.ajax({
@@ -123,12 +122,12 @@ $(document).ready(function () {
                 loadListsTable(response, query);
             },
             error: function (xhr, status) {
-                $('#text_message').text("Error en la consulta de datos");
+                console.log("Error en la consulta de datos");
             }
         });
     })
 
-    //Buscador listas
+    //Buscador de listas en el carrusel de contenido
     if ($(".splide__list")) {
         $("#searchTextBox").on("keyup", function () {
             var value = $(this).val().toLowerCase();
@@ -138,7 +137,7 @@ $(document).ready(function () {
         });
     }
 
-    //Buscador canciones
+    //Buscador de canciones en la tabla de canciones
     if ($("myTable")) {
         $("#searchTextBox").on("keyup", function () {
             var value = $(this).val().toLowerCase();
@@ -148,7 +147,7 @@ $(document).ready(function () {
         });
     }
 
-    //Register new user
+    //Form de registro para un nuevo usuario
     $("#form-submit-register").on('submit', function(e){
         e.preventDefault();
         $.ajax({
@@ -156,7 +155,6 @@ $(document).ready(function () {
             url: "PHP/lr_control.php",
             data: $('#form-submit-register').serialize(),
             success: function (response) {
-                console.log(response);
                 if(response == -1){
                     $("#register_alert").text("Error en la confirmacion de contraseña");
                 }
@@ -169,51 +167,37 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status) {
-                $('#text_message').text("Error en la consulta de datos, usuario inexistente");
+                console.log("Error en la consulta de datos, usuario inexistente");
             }
         });
     });
 
-    //Loging with forms
+    //Form de login para un usuario ya registrado
     $('#form-submit-login').on('submit', function (e) {
         e.preventDefault();
-        console.log("HOLA");
         $.ajax({
             type: "POST",
             url: "PHP/lr_control.php",
             data: $('#form-submit-login').serialize(),
             success: function (response) {
-                console.log(response);
-
                 if (response == 0){
                     $("#login_alert").text("Datos introducidos incorrectos");
-                    console.log(response);
-                    //location.reload();
-                    //idUser = response;
-                    //console.log(idUser);
-
                 }
                 else{
                     idUser = response;
                     $("#login_alert").text("Login realizado con exito, volviendo a la pagina principal...");
                     setTimeout(() => {
                         document.location.href="index.html";
-                    }, 1500);
+                    }, 1000);
                 }
-                /*
-                $('#text_message').text("Sesion iniciada");
-                $("#button_fav_songs").show();
-                $("#button_fav_songs_lists").show();
-                $('#button_songs').trigger('click');
-                */
             },
             error: function (xhr, status) {
-                $('#text_message').text("Error en la consulta de datos, usuario inexistente");
+                console.log("Error en la consulta de datos, usuario inexistente");
             }
         });
     });
 
-    //Logout
+    //Logout, para finalizar la sesion de un usuario logeado
     $("#logout-button").click(function (e) {
         e.preventDefault();
         $.ajax({
@@ -224,15 +208,16 @@ $(document).ready(function () {
             },
             success: function (response) {
                 idUser = null;
-                console.log(idUser)
                 console.log("Sesion finalizada")
                 $("#button_fav_songs").hide();
                 $("#button_fav_songs_lists").hide();
-                $('#text_message').text("Sesion finalizada");
                 $('#button_songs').trigger('click');
+                $("#login-button").show();
             }
         });
-    });    
+    });
+
+    //Boton de skip a la cancion previa en la lista
     $("#prev_song").click(function () {
         let index = json_songs.findIndex(function(item, i){
             return item.idCancion === object_id_song.substr(object_id_song.length - 1);
@@ -246,6 +231,8 @@ $(document).ready(function () {
         }
         reply_click_song(object_id_song);
     });
+
+    //Boton de skip a la cancion siguiente en la lista
     $("#next_song").click(function () { 
         let index = json_songs.findIndex(function(item, i){
             return item.idCancion === object_id_song.substr(object_id_song.length - 1);
@@ -265,6 +252,7 @@ $(document).ready(function () {
 
 });
 
+// Metodo que nos permite comprobar si el usuario contiene una sesion ya iniciada en la web
 function check_session(){
     $.ajax({
         type: "POST",
@@ -273,12 +261,11 @@ function check_session(){
             'check_session' : 0
         },
         success: function (response) {
-            console.log(response);
             if (response != 0){
-                console.log(response);
                 idUser = response;
                 $("#button_fav_songs").show();
                 $("#button_fav_songs_lists").show();
+                $("#login-button").hide();
             }
             else{
                 $("#button_fav_songs").hide();
@@ -288,16 +275,15 @@ function check_session(){
     });
 }
 
+// Metodo que nos permite cargar canciones en la tabla
 function loadSongsTable(response) {
-    $('#text_message').text("Hecho!");
     json_songs = $.parseJSON(response);
-    console.dir(json_songs);
     if ($("#tablaCanciones").children().length != 0) {
         $("#tablaCanciones").DataTable().destroy();
     }
     $("#tablaCanciones").html("<thead> <tr> <th>Titulo</th> <th>Artista</th> <th>Genero</th> <th>Duracion</th> <th>Publicacion</th> </tr> </thead> <tbody id='myTable'>");
 
-    if (idUser) { //Añadir boton de favoritos y tenerlo mapeado.
+    if (idUser) { //Añadir boton de favoritos y tenerlo mapeado. (On Development...)
         for (row of json_songs) {
             $("#tablaCanciones").append("<tr id='song-" + row["idCancion"] + "' onClick='reply_click_song(this.id)'> <td>" + row["titulo"] + " <button class='material-icons'>favorite_border</button><span>On Development...</span> </td> <td>" + row["artista"] + "</td> <td>" + row["genero"] + "</td> <td>" + row["duracion"] + "</td> <td>" + row["publicacion"] + "</td> </tr>");
         }
@@ -312,14 +298,13 @@ function loadSongsTable(response) {
     $('#tablaCanciones').DataTable();
 }
 
+// Metodo que nos permite cargar listas del tipo artistas, predeterminadas, generos musicales o las listas favoritos de un usuario logeado en el carrusel de contenido
 function loadListsTable(response, query) {
     $(".splide__list").empty();
     if($(".sidebar")[0].style.left != sidebarWidth){
         closeSidebar();
     }
-    $('#text_message').text("Hecho!");
     json_lists = $.parseJSON(response);
-    console.dir(json_lists);
     if (query == "artists-list") {
         $("#contenido_list_type").text("Artistas destacados");
     }
@@ -347,7 +332,7 @@ function loadListsTable(response, query) {
         },
       }).mount();
     
-    if(!first_scroll){ // Temporal fix
+    if(!first_scroll){ // Fix temporal
         first_scroll = true;
     }
     else{
@@ -356,32 +341,10 @@ function loadListsTable(response, query) {
     
 }
 
-function loadDefaultLists() { // Cambiar
-    /*
-    $.ajax({
-        type: "POST",
-        url: "PHP/db_control.php",
-        data: {
-            'queryValue': 'default-lists'
-        },
-        success: function (response) {
-            $('#text_message').text("Hecho!");
-            json_def_lists = $.parseJSON(response);
-            console.dir(json_def_lists);
-            for (row of json_def_lists) {
-                console.log("Hello")
-                $("<br><br><button type='button' id='access-list-" + row["idLista"] + "' onClick='reply_click_list(this.id)'>" + row["nombreLista"] + "</button>").insertAfter("#button_categories");
-            }
-        }
-    });*/
-}
-
+// Metodo que nos permite cargar en la tabla de canciones el contenido de una lista del carrusel "clickada"/elegida por el usuario.
 function reply_click_list(id) {
-    console.log(id);
     let list_name = id.substr(0, 11);
-    console.log(list_name);
     let id_list = parseInt(id.substr(id.length - 1));
-    console.log(id_list);
     $.ajax({
         type: "POST",
         url: "PHP/db_control.php",
@@ -395,16 +358,17 @@ function reply_click_list(id) {
     });
 }
 
+// Metodo que nos permite cargar y escuchar en el reproductor de musica una cancion "clickada"/elegida por el usuario de la tabla cargada de canciones.
 function reply_click_song(id) {
     if ($("#openPlayer").text() == "keyboard_arrow_up"){
         openPlayer();
     }
     object_id_song = id;
-    let song_object;
     let song_ID;
-    console.log(id);
-    // PROBAR 2º Metodo
+
+    // 2º Metodo, más optimo pero en desarrollo
     /*
+    let song_object;
     song_object = json_songs.find(song => song['idCancion'] === parseInt(id.substr(id.length - 1)));
     console.log(song_object);
     song_ID = song_object['enlace'];
@@ -424,9 +388,6 @@ function reply_click_song(id) {
             break;
         }
     }
-    
-    console.log(song_ID);
-    //This function creates an <iframe> (and YouTube player) after the API code downloads
     if(player != null){
         player.destroy();
         clearInterval(timer);
@@ -438,13 +399,13 @@ function reply_click_song(id) {
     onYouTubeIframeAPIReady(song_ID);
 }
 
+//Este metodo crea un <iframe> (y un reproductor de Youtube) despues de que se desargue el codigo API de youtube (Youtube API)
 function onYouTubeIframeAPIReady(song_ID) {
     if(song_ID){
         player = new YT.Player('music_player', {
             height: '360',
             width: '640',
             videoId: song_ID,
-            //playerVars: { 'autoplay': 1, 'controls': 0 },
             events: {
               'onReady': onPlayerReady,
               'onStateChange': onPlayerStateChange
@@ -453,6 +414,7 @@ function onYouTubeIframeAPIReady(song_ID) {
     }
 }
 
+// Metodo vinculado al reproductor de Youtube que solo tendra funcionalidad una vez cargado completamente el reproductor de Youtube.
 function onPlayerReady(event) {
     event.target.playVideo();
     $("#play").text("pause_circle_outline");
@@ -466,10 +428,8 @@ function onPlayerReady(event) {
         }
         else{
             $("#play").text("pause_circle_outline");
-            
             event.target.playVideo();
         }
-        console.log(event.target.getPlayerState());
     });
     if (YT.PlayerState.PLAYING  && !YT.PlayerState.ENDED){
         timer = setInterval(() => {
@@ -482,24 +442,22 @@ function onPlayerReady(event) {
             $("#time_slider").val(event.target.getCurrentTime());
             $('#vol_slider').val(event.target.getVolume());
             $('#vol_output').text(event.target.getVolume() + "%"); 
-            //console.log(event.target.getCurrentTime());
         }, 1000);
     }
 
     $('#time_slider').on('input', function () {
-        //console.log($('#time_slider').val());
         event.target.seekTo($(this).val(), true);
         $('#time_slider').val($(this).val());
     });
     
     $('#vol_slider').on('input', function () {
-        //console.log($('#vol_slider').val());
         event.target.setVolume($(this).val());
         $('#vol_slider').val($(this).val());
         $('#vol_output').text($(this).val() + "%"); 
     });
 }
 
+// Metodo vinculado al reproductor de Youtube que se llamará unicamente cuando se produzca algun tipo de cambio en el reproductor tipo Play, Pause, saltar cancion, etc.
 function onPlayerStateChange(event) {
     if(event.target.getPlayerState() == 0){
         player.stopVideo();
