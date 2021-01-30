@@ -344,7 +344,13 @@ function loadListsTable(response, query) {
 // Metodo que nos permite cargar en la tabla de canciones el contenido de una lista del carrusel "clickada"/elegida por el usuario.
 function reply_click_list(id) {
     let list_name = id.substr(0, 11);
-    let id_list = parseInt(id.substr(id.length - 1));
+    let id_list;
+    if (id.length == 13){
+        id_list = parseInt(id.substr(id.length - 1));
+    }
+    else if(id.length == 14){
+        id_list = parseInt(id.substr(id.length - 2));
+    }
     $.ajax({
         type: "POST",
         url: "PHP/db_control.php",
@@ -376,10 +382,16 @@ function reply_click_song(id) {
     $("#song_name").html("<strong>" + song_object['titulo'] + "</strong>");
     $("#category_name").html("<strong>" + song_object['genero'] + "</strong>");
     */
-    
+   let id_song_match = id;
+   if (id.length == 6){
+       id_song_match = parseInt(id.substr(id.length - 1));
+   }
+   else if(id.length == 7){
+       id_song_match = parseInt(id.substr(id.length - 2));
+   }
     //1º Metodo
     for (var key in json_songs) {
-        if (json_songs[key]['idCancion'] == parseInt(id.substr(id.length - 1))) {
+        if (json_songs[key]['idCancion'] == id_song_match) {
             song_ID = json_songs[key]['enlace'];
             //Aqui se pueden coger el resto de campos y cargarlos en unos <p> o lo que sea
             $("#artist_name").html("<strong>" + json_songs[key]['artista'] + "</strong>");
