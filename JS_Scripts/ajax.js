@@ -3,7 +3,7 @@ var json_songs;
 var object_id_song;
 var player = null;
 var timer;
-var first_scroll = false;
+var first_scroll = [false, false]
 var tag = document.createElement('script');
 
 tag.src = "https://www.youtube.com/iframe_api";
@@ -17,6 +17,9 @@ $(document).ready(function () {
 
     // Boton que permite cargar todas las canciones
     $('#button_songs').click(function () {
+        if($(".sidebar")[0].style.left != sidebarWidth){
+            closeSidebar();
+        }
         let query = $('#button_songs').val();
         $.ajax({
             type: 'POST',
@@ -34,6 +37,12 @@ $(document).ready(function () {
                 console.log("Error en la consulta de datos");
             }
         });
+        if(!first_scroll[0]){ // Fix temporal
+            first_scroll[0] = true;
+        }
+        else{
+            window.scrollTo(0,document.body.scrollHeight);
+        }
     });
 
     //Boton que permite cargar las canciones favoritas del usuario con la sesion iniciada
@@ -332,8 +341,8 @@ function loadListsTable(response, query) {
         },
       }).mount();
     
-    if(!first_scroll){ // Fix temporal
-        first_scroll = true;
+    if(!first_scroll[1]){ // Fix temporal
+        first_scroll[1] = true;
     }
     else{
         window.scrollTo(0,document.body.scrollHeight);
@@ -343,6 +352,9 @@ function loadListsTable(response, query) {
 
 // Metodo que nos permite cargar en la tabla de canciones el contenido de una lista del carrusel "clickada"/elegida por el usuario.
 function reply_click_list(id) {
+    if($(".sidebar")[0].style.left != sidebarWidth){
+        closeSidebar();
+    }
     let list_name = id.substr(0, 11);
     let id_list;
     if (id.length == 13){
