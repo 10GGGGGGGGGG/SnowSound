@@ -41,7 +41,7 @@ $(document).ready(function () {
             first_scroll[0] = true;
         }
         else{
-            window.scrollTo(0,document.body.scrollHeight);
+            document.getElementsByClassName('contenido')[0].scrollIntoView();
         }
     });
 
@@ -321,7 +321,7 @@ function loadListsTable(response, query) {
         $("#contenido_list_type").text("Listas de música");
     }
     else if (query == "category-lists") {
-        $("#contenido_list_type").text("Generos");
+        $("#contenido_list_type").text("Géneros");
     }
     else {
         $("#contenido_list_type").text("Mis Listas Favoritas");
@@ -345,7 +345,7 @@ function loadListsTable(response, query) {
         first_scroll[1] = true;
     }
     else{
-        window.scrollTo(0,document.body.scrollHeight);
+        document.getElementsByClassName('contenido')[0].scrollIntoView();
     }
     
 }
@@ -374,6 +374,7 @@ function reply_click_list(id) {
             loadSongsTable(response);
         }
     });
+    document.getElementsByClassName('contenido')[0].scrollIntoView();
 }
 
 // Metodo que nos permite cargar y escuchar en el reproductor de musica una cancion "clickada"/elegida por el usuario de la tabla cargada de canciones.
