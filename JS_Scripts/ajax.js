@@ -136,6 +136,12 @@ $(document).ready(function () {
         });
     })
 
+    if ($(".splide__list")||$("myTable")){
+        $("#searchTextBox").on('focus', function (){
+            document.getElementsByClassName('contenido')[0].scrollIntoView();
+        })
+    }
+
     //Buscador de listas en el carrusel de contenido
     if ($(".splide__list")) {
         $("#searchTextBox").on("keyup", function () {
@@ -228,14 +234,15 @@ $(document).ready(function () {
 
     //Boton de skip a la cancion previa en la lista
     $("#prev_song").click(function () {
+        let id_song_match = object_id_song;
         let index = json_songs.findIndex(function(item, i){
-            return item.idCancion === object_id_song.substr(object_id_song.length - 1);
-          });
+            return item.idCancion === String(id_song_match);
+        });
         if ((index - 1) < 0){
-            object_id_song = object_id_song.substr(0, object_id_song.length - 1) + json_songs[json_songs.length - 1]['idCancion'];
+            object_id_song = "song-" + json_songs[json_songs.length - 1]['idCancion'];
         }
         else{
-            object_id_song = object_id_song.substr(0, object_id_song.length - 1) + json_songs[index - 1]['idCancion'];
+            object_id_song = "song-" + json_songs[index - 1]['idCancion'];
 
         }
         reply_click_song(object_id_song);
@@ -243,15 +250,15 @@ $(document).ready(function () {
 
     //Boton de skip a la cancion siguiente en la lista
     $("#next_song").click(function () { 
+        let id_song_match = object_id_song;
         let index = json_songs.findIndex(function(item, i){
-            return item.idCancion === object_id_song.substr(object_id_song.length - 1);
-          });
-        console.log(index);
+            return item.idCancion === String(id_song_match);
+        });
         if ((index + 1) > (json_songs.length - 1)){
-            object_id_song = object_id_song.substr(0, object_id_song.length - 1) + json_songs[0]['idCancion'];
+            object_id_song = "song-" + json_songs[0]['idCancion'];
         }
         else{
-            object_id_song = object_id_song.substr(0, object_id_song.length - 1) + json_songs[index + 1]['idCancion'];
+            object_id_song = "song-" + json_songs[index + 1]['idCancion'];
         }
         reply_click_song(object_id_song);
     });
@@ -304,7 +311,13 @@ function loadSongsTable(response) {
         }
         $("#tablaCanciones").append("</tbody>");
     }
-    $('#tablaCanciones').DataTable();
+    $('#tablaCanciones').DataTable({
+        "order": [],
+        "columnDefs": [ {
+            "targets"  : 'no-sort',
+            "orderable": false,
+        }]
+    });
 }
 
 // Metodo que nos permite cargar listas del tipo artistas, predeterminadas, generos musicales o las listas favoritos de un usuario logeado en el carrusel de contenido
@@ -382,8 +395,6 @@ function reply_click_song(id) {
     if ($("#openPlayer").text() == "keyboard_arrow_up"){
         openPlayer();
     }
-    object_id_song = id;
-    let song_ID;
 
     // 2º Metodo, más optimo pero en desarrollo
     /*
@@ -395,13 +406,15 @@ function reply_click_song(id) {
     $("#song_name").html("<strong>" + song_object['titulo'] + "</strong>");
     $("#category_name").html("<strong>" + song_object['genero'] + "</strong>");
     */
-   let id_song_match = id;
-   if (id.length == 6){
-       id_song_match = parseInt(id.substr(id.length - 1));
-   }
-   else if(id.length == 7){
-       id_song_match = parseInt(id.substr(id.length - 2));
-   }
+    let id_song_match = id;
+    if (id.length == 6){
+        id_song_match = parseInt(id.substr(id.length - 1));
+    }
+    else if(id.length == 7){
+        id_song_match = parseInt(id.substr(id.length - 2));
+    }
+    object_id_song = id_song_match;
+    let song_ID;
     //1º Metodo
     for (var key in json_songs) {
         if (json_songs[key]['idCancion'] == id_song_match) {
