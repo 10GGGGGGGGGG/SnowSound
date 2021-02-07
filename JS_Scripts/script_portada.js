@@ -25,13 +25,20 @@ function openPlayer() {
     document.getElementById("openPlayer").innerHTML = "keyboard_arrow_down";
     document.getElementById("trapezoid").style.bottom = "70px";
     document.getElementsByClassName("player")[0].style.bottom = "0px";
-    document.getElementsByClassName("footer")[0].style.transform = "translateY(-70px)";
+    document.getElementsByClassName("footer")[0].style.transform =
+      "translateY(-70px)";
   } else {
     document.getElementById("openPlayer").innerHTML = "keyboard_arrow_up";
     document.getElementById("trapezoid").style.bottom = "0px";
     document.getElementsByClassName("player")[0].style.bottom = "-70px";
-    document.getElementsByClassName("footer")[0].style.transform = "translateY(0px)";
+    document.getElementsByClassName("footer")[0].style.transform =
+      "translateY(0px)";
   }
 }
 
-
+function transitionToMusic() {
+  document.getElementsByClassName("portada")[0].classList.add("animationOut");
+  document
+    .getElementsByClassName("content-and-footer")[0]
+    .classList.add("animationIn");
+}
